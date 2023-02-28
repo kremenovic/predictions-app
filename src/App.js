@@ -5,7 +5,8 @@ import {
   Bankroll,
   Dashboard,
   Prediction,
-  Profile,
+  Settings,
+  News,
   SharedLayout,
 } from "./pages/dashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
@@ -26,9 +27,9 @@ function App() {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
           <Route path="prediction/:id" element={<Prediction />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="news" element={<News />} />
           <Route path="bankroll" element={<Bankroll />} />
         </Route>
         <Route path="*" element={<Error />} />
