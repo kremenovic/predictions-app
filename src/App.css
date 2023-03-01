@@ -18,6 +18,10 @@ body {
   position: relative;
 }
 
+.hamburger-icon {
+   color: #8a8a8a;
+}
+
 .dashboard header {
   background-color: #1E1E1E;
 }
@@ -28,4 +32,86 @@ body {
 
 .mode-switcher p {
   color: #8a8a8a;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 5px;
+  
+}
+
+.user-btn {
+  color: #8a8a8a;
+}
+
+.dropdown {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  visibility: hidden;
+  width: 100%;
+  opacity: 0;
+}
+
+.dropdown.show {
+  visibility: inherit;
+  opacity:1;
+  transition: visibility 0.2s linear,opacity 0.2s linear;
+}
+
+.dropdown.show button {
+  background-color: #E72641;
+  width: 100%;
+  justify-content: center;
+  color: #fff;
+}
+
+.mobile-navigation {
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: -1;
+  opacity: 0;
+}
+
+.mobile-navigation.show-nav {
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0.2s linear,opacity 0.2s linear;
+}
+
+.mobile-navigation .content {
+  width: 90vw;
+  height: 95vh;
+  padding: 4rem 2rem;
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff;;
+}
+
+.mobile-navigation .content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border-color: transparent;
+  font-size: 2rem;
+  cursor: pointer;
 }

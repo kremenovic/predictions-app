@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactSwitch from "react-switch";
+import { useMediaQuery } from "react-responsive";
 
 const DarkMode = () => {
   const [themeState, setThemeState] = useState(false);
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const toggleTheme = () => {
-    //  setTheme((curr) => (curr === "light" ? "dark" : "light"));
-
     setThemeState(!themeState);
   };
 
@@ -33,7 +32,10 @@ const DarkMode = () => {
   }, [themeState]);
   return (
     <div className="flex items-center mode-switcher">
-      <p className="mr-5">{themeState ? <>Dark Mode</> : <>Light Mode</>}</p>
+      {!isMobile ? (
+        <p className="mr-5">{themeState ? <>Dark Mode</> : <>Light Mode</>}</p>
+      ) : null}
+
       <ReactSwitch
         onChange={toggleTheme}
         checked={themeState === true}
