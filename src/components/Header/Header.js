@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { FaBars } from "react-icons/fa";
 import Logo from "../../assets/logo.svg";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showMobileNav } from "../../features/user/userSlice";
 import NavigationLinks from "./NavigationLinks";
 

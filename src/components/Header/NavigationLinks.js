@@ -1,14 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch } from "react-redux";
+import { showMobileNav } from "../../features/user/userSlice";
+
 import links from "../../utils/links";
 
 const NavigationLinks = () => {
+  const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   let activeStyle = {
     textDecoration: "underline",
     color: "#E72641",
+  };
+
+  const toggle = () => {
+    dispatch(showMobileNav());
   };
 
   return (
@@ -31,6 +39,7 @@ const NavigationLinks = () => {
             }
             key={id}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={toggle}
           >
             {text}
           </NavLink>
