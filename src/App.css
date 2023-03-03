@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 #root,
@@ -22,7 +22,7 @@ body {
    color: #8a8a8a;
 }
 
-.dashboard header {
+.dark-bg {
   background-color: #1E1E1E;
 }
 
@@ -67,6 +67,10 @@ body {
   width: 100%;
   justify-content: center;
   color: #fff;
+}
+
+.dropdown.show button:hover {
+  background-color: #f1465e;
 }
 
 .mobile-navigation {
@@ -114,4 +118,17 @@ body {
   border-color: transparent;
   font-size: 2rem;
   cursor: pointer;
+}
+
+.leagues ul li {
+  color: #8a8a8a;
+}
+
+.leagues ul li.active {
+  text-decoration: underline;
+  color: #e72641;
+}
+
+.leagues ul li:hover {
+  color: #e72641;
 }

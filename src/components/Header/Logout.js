@@ -16,7 +16,7 @@ const Logout = () => {
         <FaAngleDown className="text-medium" />
       </button>
       <div className={show ? "dropdown show" : "dropdown"}>
-        <button type="button" className="btn">
+        <button type="button" className="btn hover:transition-all duration-300">
           Logout
         </button>
       </div>

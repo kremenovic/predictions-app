@@ -37,7 +37,7 @@ const NavigationLinks = () => {
             to={path}
             className={
               !isMobile
-                ? "mx-4 font-semibold tracking-wider hover:text-gray-600"
+                ? "mx-4 font-semibold tracking-wider hover:text-gray-600 hover:translate-y-1 transition-all duration-300"
                 : "mx-4 font-semibold tracking-wider hover:text-gray-600 text-2xl pb-2 last:pb-0"
             }
             key={id}

@@ -16,7 +16,7 @@ const Header = () => {
     dispatch(showMobileNav());
   };
   return (
-    <header className="flex items-center justify-between py-7 px-6">
+    <header className="flex items-center justify-between py-7 px-6 dark-bg">
       <div className="flex items-center">
         <Link className="flex items-center">
           <img src={Logo} alt="Logo" className="h-8" />
