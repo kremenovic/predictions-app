@@ -1,13 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showMobileNav } from "../../features/user/userSlice";
 
 import links from "../../utils/links";
 
 const NavigationLinks = () => {
   const dispatch = useDispatch();
+  const { isMobileNavOpen } = useSelector((store) => store.user);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   let activeStyle = {
@@ -16,7 +17,9 @@ const NavigationLinks = () => {
   };
 
   const toggle = () => {
-    dispatch(showMobileNav());
+    if (isMobileNavOpen) {
+      dispatch(showMobileNav());
+    }
   };
 
   return (
