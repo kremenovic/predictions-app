@@ -11,6 +11,7 @@ import {
 } from "./pages/dashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import "./App.css";
+import "react-calendar/dist/Calendar.css";
 
 function App() {
   return (

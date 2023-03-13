@@ -26,6 +26,10 @@ body {
   background-color: #1E1E1E;
 }
 
+.custom-gray {
+  color: #8a8a8a;
+}
+
 .dashboard header nav a {
   color: #8a8a8a;
 }
@@ -131,4 +135,52 @@ body {
 
 .leagues ul li:hover {
   color: #e72641;
+}
+
+.prediction {
+  border: 1px solid #fff;
+}
+
+.versus p {
+  background: #e72641;
+  padding: 0 10px;
+}
+
+.center-icon {
+    left: 90%;
+    top: 55%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.calendar-alignment {
+    left: 70%;
+    top: 34%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.react-calendar__tile--active{
+  background-color: #E72641!important;
+}
+
+.react-calendar__tile:disabled {
+  cursor: not-allowed;
+}
+
+.filter-btn {
+  background-color: #E72641;
+  color: #fff;
+  width: 100%;
+  justify-content: center;
+  padding: 8px 15px;
+}
+
+/*** RESPONSIVE ***/
+
+@media only screen and (max-width: 768px) {
+    .calendar-alignment {
+      left: 50%;
+      top: 68%;
+    }
 }
