@@ -24,9 +24,6 @@ const Dashboard = () => {
           <Predictions />
         </div>
       </section>
-      <section className="news dark-bg w-full rounded p-5 h-fit lg:w-2/6">
-        <h1 className="mb-5 text-xl text-white ">Trending News</h1>
-      </section>
     </div>
   );
 };

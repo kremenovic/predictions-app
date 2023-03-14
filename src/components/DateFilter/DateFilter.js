@@ -29,7 +29,7 @@ const DateFilter = () => {
     getYesterday();
   }, [showCalendar]);
   return (
-    <>
+    <div className="relative w-full lg:w-auto">
       <div
         className="relative cursor-pointer mt-2 w-full lg:w-auto lg:mt-0"
         onClick={handleShowCalendar}
@@ -58,7 +58,7 @@ const DateFilter = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

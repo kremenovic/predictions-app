@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMediaQuery } from "react-responsive";
+import { useSelector, useDispatch } from "react-redux";
+import { showMobileLeague } from "../../features/user/userSlice";
 import Leagues from "./Leagues";
 import england from "../../assets/leagues/country-en.svg";
 const MobileLeagues = () => {
-  const [showLeagues, setShowLeagues] = useState(false);
+  const dispatch = useDispatch();
+  const { isMobileLeagueOpen } = useSelector((store) => store.user);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const handleFilterClick = () => {
+    dispatch(showMobileLeague());
+  };
   return (
     <>
       <div className="flex justify-between w-full mb-2">
@@ -20,14 +27,14 @@ const MobileLeagues = () => {
           <div className="flex">
             <button
               className="btn filter-btn tracking-wider"
-              onClick={() => setShowLeagues(!showLeagues)}
+              onClick={handleFilterClick}
             >
               Filter
             </button>
           </div>
         ) : null}
       </div>
-      {showLeagues && <Leagues />}
+      {isMobileLeagueOpen && <Leagues isMobile={isMobile} />}
     </>
   );
 };
