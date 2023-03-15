@@ -1,14 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLeague, showMobileLeague } from "../../features/user/userSlice";
-import { useMediaQuery } from "react-responsive";
 import leagues from "../../utils/leagues";
 const Leagues = ({ isMobile }) => {
   const dispatch = useDispatch();
   const { selectedLeague } = useSelector((store) => store.user);
-
-  const handleLeagueClick = (id) => {
-    dispatch(selectLeague(id));
+  const handleLeagueClick = (id, leagueName, country) => {
+    dispatch(selectLeague({ id, leagueName, country }));
     if (isMobile) {
       dispatch(showMobileLeague());
     }
@@ -18,14 +16,14 @@ const Leagues = ({ isMobile }) => {
       <h1 className="mb-5 text-xl text-white ">Leagues</h1>
       <ul>
         {leagues.map((league) => {
-          const { id, leagueName, path } = league;
-          const active = id === selectedLeague ? "active" : "";
+          const { id, leagueName, path, countryName } = league;
+          const active = id === selectedLeague.id ? "active" : "";
           return (
             <li
               key={id}
               className={`flex cursor-pointer pb-4 last:pb-0 hover:translate-x-1 transition-all duration-300 ${active}`}
               onClick={() => {
-                handleLeagueClick(id);
+                handleLeagueClick(id, leagueName, countryName);
               }}
             >
               <img src={path} alt={leagueName} className="w-6 mr-2" />

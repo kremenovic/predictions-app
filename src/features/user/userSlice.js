@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const initialState = {
   isMobileNavOpen: false,
   isMobileLeagueOpen: false,
-  selectedLeague: 39,
+  selectedLeague: { id: 39, name: "Premier League", country: "england" },
 };
 
 const userSlice = createSlice({
@@ -14,8 +14,9 @@ const userSlice = createSlice({
     showMobileNav: (state) => {
       state.isMobileNavOpen = !state.isMobileNavOpen;
     },
-    selectLeague: (state, action) => {
-      state.selectedLeague = action.payload;
+    selectLeague: (state, { payload }) => {
+      const { id, leagueName: name, country } = payload;
+      state.selectedLeague = { ...state.selectedLeague, id, name, country };
     },
     showMobileLeague: (state) => {
       state.isMobileLeagueOpen = !state.isMobileLeagueOpen;
