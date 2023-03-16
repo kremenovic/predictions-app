@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { showCalendar, changeDate } from "../../features/user/userSlice";
 import { FaCalendarAlt } from "react-icons/fa";
 const DateFilter = () => {
-  const [showCalendar, setShowCalendar] = useState(false);
   const [currentDate, setCurrentDate] = useState();
-  const [date, setDate] = useState(new Date());
-  const handleShowCalendar = () => {
-    setShowCalendar(!showCalendar);
+  const dispatch = useDispatch();
+  const { isCalendarOpen, selectedDate } = useSelector((store) => store.user);
+  const toggle = () => {
+    dispatch(showCalendar());
   };
   const handleChangeDate = (date) => {
-    setShowCalendar(false);
-    setDate(date);
+    toggle();
+    dispatch(changeDate(date.toISOString()));
   };
 
   const getYesterday = () => {
@@ -27,31 +29,31 @@ const DateFilter = () => {
 
   useEffect(() => {
     getYesterday();
-  }, [showCalendar]);
+  }, [isCalendarOpen]);
   return (
     <div className="relative w-full lg:w-auto">
       <div
         className="relative cursor-pointer mt-2 w-full lg:w-auto lg:mt-0"
-        onClick={handleShowCalendar}
+        onClick={toggle}
       >
         <input
           type="text"
           id="issueDate"
           className="border dark-bg cursor-pointer relative h-12 mt-2 w-full custom-gray px-3 focus:outline-none focus:border-purple-500 rounded-lg"
-          value={moment(date).format("DD MMM YYYY")}
+          value={moment(selectedDate).format("DD MMM YYYY")}
           disabled
         />
         <FaCalendarAlt className="absolute center-icon custom-gray text-sm" />
       </div>
       <div
         className={`flex absolute z-50  bg-white mb-5 flex-col calendar-alignment ${
-          showCalendar ? "flex" : "hidden"
+          isCalendarOpen ? "flex" : "hidden"
         }`}
       >
         <div>
           <Calendar
             onChange={handleChangeDate}
-            value={date}
+            value={new Date(selectedDate)}
             showNavigation={false}
             showNeighboringMonth={false}
             tileDisabled={tileDisabled}

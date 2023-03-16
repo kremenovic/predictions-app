@@ -5,6 +5,8 @@ const initialState = {
   isMobileNavOpen: false,
   isMobileLeagueOpen: false,
   selectedLeague: { id: 39, name: "Premier League", country: "england" },
+  selectedDate: new Date().toISOString(),
+  isCalendarOpen: false,
 };
 
 const userSlice = createSlice({
@@ -21,9 +23,20 @@ const userSlice = createSlice({
     showMobileLeague: (state) => {
       state.isMobileLeagueOpen = !state.isMobileLeagueOpen;
     },
+    showCalendar: (state) => {
+      state.isCalendarOpen = !state.isCalendarOpen;
+    },
+    changeDate: (state, { payload }) => {
+      state.selectedDate = payload;
+    },
   },
 });
 
-export const { showMobileNav, selectLeague, showMobileLeague } =
-  userSlice.actions;
+export const {
+  showMobileNav,
+  selectLeague,
+  showMobileLeague,
+  showCalendar,
+  changeDate,
+} = userSlice.actions;
 export default userSlice.reducer;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -12,17 +13,18 @@ import Loading from "../../components/Loading/Loading";
 const Dashboard = () => {
   const {
     selectedLeague: { id },
+    selectedDate,
   } = useSelector((store) => store.user);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
+  const formatedDate = moment(new Date(selectedDate)).format("YYYY-MM-DD");
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `https://v3.football.api-sports.io/fixtures?league=${id}&season=2022&date=2023-03-18`,
+          `https://v3.football.api-sports.io/fixtures?league=${id}&season=2022&date=${formatedDate}`,
           {
             headers: {
               "x-rapidapi-key": "af40d37b524e0e1b5bd6aba34f37dd40",
@@ -31,7 +33,10 @@ const Dashboard = () => {
           }
         );
         const data = res.data.response;
-        localStorage.setItem(`footballData-${id}`, JSON.stringify(data));
+        localStorage.setItem(
+          `footballData-${id}-${formatedDate}`,
+          JSON.stringify(data)
+        );
         setLoading(false);
         return data;
       } catch (error) {
@@ -39,7 +44,9 @@ const Dashboard = () => {
         return null;
       }
     };
-    const storedData = localStorage.getItem(`footballData-${id}`);
+    const storedData = localStorage.getItem(
+      `footballData-${id}-${formatedDate}`
+    );
     if (storedData) {
       setData(JSON.parse(storedData));
       console.log("ls");
@@ -47,7 +54,7 @@ const Dashboard = () => {
       fetch().then((data) => setData(data));
       console.log("fetch");
     }
-  }, [id]);
+  }, [id, formatedDate]);
 
   return (
     <div className="main-section flex flex-col gap-4 p-5 lg:flex-row">
