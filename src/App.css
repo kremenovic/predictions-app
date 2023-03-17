@@ -30,6 +30,10 @@ body {
   color: #8a8a8a;
 }
 
+.custom-border {
+  border-color: #2e2e2e;
+}
+
 .dashboard header nav a {
   color: #8a8a8a;
 }
@@ -200,5 +204,8 @@ body {
 /*** RESPONSIVE ***/
 
 @media only screen and (max-width: 768px) {
-    /* test */
+   .prediction-team {
+    max-width: 100px;
+    text-align: center;
+   }
 }

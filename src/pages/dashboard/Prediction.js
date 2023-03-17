@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import SinglePrediction from "../../components/SinglePrediction/SinglePrediction";
+
 const Prediction = () => {
-  const { id } = useParams();
-  return <div>predictions for {id}</div>;
+  return <SinglePrediction />;
 };
 
 export default Prediction;
