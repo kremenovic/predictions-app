@@ -68,3 +68,36 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+import axios from 'axios';
+
+const loginAndGetToken = async (username, password) => {
+  try {
+    // Make a POST request to the JWT authentication endpoint
+    const response = await axios.post('/wp-json/jwt-auth/v1/token', {
+      username,
+      password,
+    });
+
+    // If the request is successful, extract the token from the response
+    const token = response.data.token;
+
+    // Use the token to make a GET request to a custom REST API endpoint
+    const subscriptionResponse = await axios.get('/wp-json/my-plugin/v1/check-subscription', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    // If the subscription check is successful, return the token
+    if (subscriptionResponse.data.status === 'active') {
+      return token;
+    }
+
+    // If the subscription is not active, throw an error
+    throw new Error('Subscription is not active');
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+```

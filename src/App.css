@@ -26,12 +26,49 @@ body {
   background-color: #1E1E1E;
 }
 
+.darkChart-bg {
+  background-color: #2d3338;
+}
+
 .custom-gray {
   color: #8a8a8a;
 }
 
 .custom-border {
   border-color: #2e2e2e;
+}
+
+.custom-red-bg {
+  background: #e72641;
+}
+
+.custom-green-bg {
+  background: #379237;
+}
+
+.no-bg {
+  border: 1px solid #3E4954;
+  background: transparent;
+}
+
+.home-bg {
+  background: #0F8DEB;
+}
+
+.home-color {
+  color: #0F8DEB;
+}
+
+.draw-bg {
+  background: #3E4954;
+}
+
+.away-bg {
+  background: #F01E1F;
+}
+
+.away-color {
+  color: #F01E1F;
 }
 
 .dashboard header nav a {

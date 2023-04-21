@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Leagues from "../../components/Leagues/Leagues";
 import Banner from "../../components/Banner/Banner";
 import Predictions from "../../components/Predictions/Predictions";
 import DateFilter from "../../components/DateFilter/DateFilter";
 import MobileLeagues from "../../components/Leagues/MobileLeagues";
 import Loading from "../../components/Loading/Loading";
+import { selectGame } from "../../features/user/userSlice";
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const {
     selectedLeague: { id },
     selectedDate,
@@ -19,6 +21,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const formatedDate = moment(new Date(selectedDate)).format("YYYY-MM-DD");
+  const handleLeagueSelection = (fixture) => {
+    dispatch(selectGame({ fixture }));
+  };
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
@@ -82,6 +87,7 @@ const Dashboard = () => {
                     key={index}
                     to={`/dashboard/prediction/${fixture.id}`}
                     className="mb-7 last:mb-0"
+                    onClick={() => handleLeagueSelection(fixture)}
                   >
                     <Predictions fixture={fixture} teams={teams} />
                   </Link>

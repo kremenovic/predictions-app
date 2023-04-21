@@ -21,7 +21,7 @@ const Header = () => {
         <Link className="flex items-center">
           <img src={Logo} alt="Logo" className="h-8" />
           <h3 className="ml-3 text-white font-bold text-2xl">
-            {!isMobile ? "Sport Prediction App" : null}
+            {!isMobile ? "MatchMate.io" : null}
           </h3>
         </Link>
       </div>
