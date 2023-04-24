@@ -90,7 +90,7 @@ const SinglePrediction = () => {
           <div className="flex items-center custom-gray">
             <FaRegClock className="mr-2" />
             <p>
-              {moment(selectedGame.date).format("DD - MM - YYYY")} -{" "}
+              {moment(selectedGame.date).format("DD-MM-YYYY")} -{" "}
               <Moment format="h:mm z" tz="CET">
                 {selectedGame.date}
               </Moment>
@@ -257,16 +257,26 @@ const SinglePrediction = () => {
                 className={`p-3 mt-6 rounded ${className}`}
                 key={prevGame.fixture.id}
               >
-                <div className="grid grid-cols-3 justify-items-center items-center">
-                  <p className="text-white">{prevGame.teams.away.name}</p>
-                  <p className="text-white flex flex-col justify-center text-center">
-                    <span className="text-xs custom-gray">
-                      ({prevGame.score.halftime.away} :{" "}
-                      {prevGame.score.halftime.home})
-                    </span>
-                    {prevGame.goals.away} : {prevGame.goals.home}
-                  </p>
-                  <p className="text-white">{prevGame.teams.home.name}</p>
+                <div className="flex">
+                  <div className="justify-center flex items-center w-1/4">
+                    <p className="custom-gray flex items-center text-sm">
+                      <FaRegClock className="mr-2" />{" "}
+                      {moment(prevGame.fixture.date).format("DD-MM-YYYY")}
+                    </p>
+                  </div>
+                  <div className="w-3/4 col-span-2">
+                    <div className="grid grid-cols-3 justify-items-center items-center">
+                      <p className="text-white">{prevGame.teams.away.name}</p>
+                      <p className="text-white flex flex-col justify-center text-center">
+                        <span className="text-xs custom-gray">
+                          ({prevGame.score.halftime.away} :{" "}
+                          {prevGame.score.halftime.home})
+                        </span>
+                        {prevGame.goals.away} : {prevGame.goals.home}
+                      </p>
+                      <p className="text-white">{prevGame.teams.home.name}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             );

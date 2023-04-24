@@ -6,12 +6,14 @@ Chart.register(ChartDataLabels);
 
 const DoughnutChart = ({ data = {} }) => {
   const chartData = {
-    labels: ["", ""],
+    labels: ["Home", "Away"],
     datasets: [
       {
         data: [data.home, data.away],
         backgroundColor: ["#0F8DEB", "#F01E1F"],
         hoverBackgroundColor: ["#0F8DEB", "#F01E1F"],
+        borderWidth: 8,
+        borderColor: "#1E1E1E",
       },
     ],
   };
