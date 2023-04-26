@@ -4,9 +4,9 @@ import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 
-const DoughnutChart = ({ data = {} }) => {
+const DoughnutChart = ({ data = {}, labels: { label1, label2 } }) => {
   const chartData = {
-    labels: ["Home", "Away"],
+    labels: [label1, label2],
     datasets: [
       {
         data: [data.home, data.away],

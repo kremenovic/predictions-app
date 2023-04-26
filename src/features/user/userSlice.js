@@ -4,7 +4,12 @@ import { toast } from "react-toastify";
 const initialState = {
   isMobileNavOpen: false,
   isMobileLeagueOpen: false,
-  selectedLeague: { id: 39, name: "Premier League", country: "england" },
+  selectedLeague: {
+    id: 39,
+    name: "Premier League",
+    country: "england",
+    season: 2022,
+  },
   selectedGame: { date: null, referee: null, city: null, stadium: null },
   selectedDate: new Date().toISOString(),
   isCalendarOpen: false,

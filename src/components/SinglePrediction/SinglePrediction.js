@@ -10,10 +10,16 @@ import { FaRegClock, FaLongArrowAltLeft, FaCircle } from "react-icons/fa";
 import { GiSoccerField, GiWhistle } from "react-icons/gi";
 import CustomLineChart from "../Charts/CustomLineChart";
 import DoughnutChart from "../Charts/DoughnutChart";
+import Standings from "./Standings/Standings";
+import HeadToHead from "./HeadToHead/HeadToHead";
+import SectionTitle from "./SectionTitle/SectionTitle";
+import PredictionsInfo from "./PredictionsInfo/PredictionsInfo";
 const SinglePrediction = () => {
   const [data, setData] = useState(null);
+  const [standingsData, setStandingsData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { selectedGame } = useSelector((store) => store.user);
+  const [activeTab, setActiveTab] = useState("overview");
+  const { selectedGame, selectedLeague } = useSelector((store) => store.user);
   const { id } = useParams();
   const fieldMap = {
     Form: "form",
@@ -55,6 +61,50 @@ const SinglePrediction = () => {
       console.log("fetch");
     }
   }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `https://v3.football.api-sports.io/standings?league=${selectedLeague.id}&season=${selectedLeague.season}`,
+          {
+            headers: {
+              "x-rapidapi-key": "af40d37b524e0e1b5bd6aba34f37dd40",
+              "x-rapidapi-host": "v3.football.api-sports.io",
+            },
+          }
+        );
+        const data = res.data.response;
+        localStorage.setItem(
+          `Standings-${selectedLeague.id}-${selectedLeague.season}`,
+          JSON.stringify(data)
+        );
+        setLoading(false);
+        return data;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    };
+    const getLocalData = () => {
+      setLoading(true);
+      const storedData = localStorage.getItem(
+        `Standings-${selectedLeague.id}-${selectedLeague.season}`
+      );
+      if (storedData) {
+        setStandingsData(JSON.parse(storedData));
+        // console.log("ls");
+        setLoading(false);
+      } else {
+        fetch().then((data) => setStandingsData(data));
+        console.log("fetchs");
+      }
+    };
+    getLocalData();
+  }, []);
+
+  const standings = standingsData?.[0]?.league?.standings;
 
   if (loading) {
     return <Loading />;
@@ -135,63 +185,20 @@ const SinglePrediction = () => {
           </div>
         </div>
       </div>
-      {/* Who's gonna win  */}
-      <div className="prediction-info ">
-        <div className="advice flex flex-col max-w-3xl mx-auto justify-center items-center py-4">
-          <h1 className="custom-gray">
-            Who will win {data?.[0].teams.home.name} or{" "}
-            {data?.[0].teams.away.name}?
-          </h1>
-          <p className="custom-gray  text-sm mt-3 ">home or draw or away</p>
-        </div>
-        <div className="flex flex-row max-w-3xl mx-auto justify-center items-center gap-5 py-4 ">
-          <div
-            className="home-bg text-center rounded-lg"
-            style={{ width: data?.[0].predictions.percent.home }}
-          >
-            <p className="text-xs text-white">
-              {data?.[0].predictions.percent.home}
-            </p>
-          </div>
-          <div
-            className="draw-bg text-center rounded-lg"
-            style={{ width: data?.[0].predictions.percent.draw }}
-          >
-            <p className="text-xs text-white">
-              {data?.[0].predictions.percent.draw}
-            </p>
-          </div>
-          <div
-            className="away-bg text-center rounded-lg"
-            style={{ width: data?.[0].predictions.percent.away }}
-          >
-            <p className="text-xs text-white">
-              {data?.[0].predictions.percent.away}
-            </p>
-          </div>
+      <div className="border-b custom-border py-4">
+        <div className="flex flex-row gap-5 justify-center">
+          <button className="custom-gray">Overview</button>
+          <button className="custom-gray">Head to Head</button>
+          <button className="custom-gray">Standings</button>
+          <button className="custom-gray">Test</button>
         </div>
       </div>
+      {/* Who's gonna win  */}
+      <PredictionsInfo data={data} />
       <div className="charts grid grid-cols-1 gap-5 mt-6 md:grid-cols-2">
+        {/* Comparison */}
         <div className="container dark-bg rounded  p-6">
-          <div className="chartHead flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                src={data?.[0].teams.home.logo}
-                alt={data?.[0].teams.home.name}
-                className="w-8"
-              />
-              <FaCircle className="home-color mr-1 text-xs" />
-            </div>
-            <h3 className="text-white">Comparison</h3>
-            <div className="flex items-center">
-              <FaCircle className="away-color mr-1 text-xs" />
-              <img
-                src={data?.[0].teams.away.logo}
-                alt={data?.[0].teams.away.name}
-                className="w-8"
-              />
-            </div>
-          </div>
+          <SectionTitle data={data} title="Comparison" />
           {Object.keys(fieldMap).map((customFieldName, index) => {
             const propertyName = fieldMap[customFieldName];
             return (
@@ -204,83 +211,39 @@ const SinglePrediction = () => {
             );
           })}
         </div>
+        {/* Goals */}
         <div className="container dark-bg rounded  p-6">
-          <div className="chartHead flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                src={data?.[0].teams.home.logo}
-                alt={data?.[0].teams.home.name}
-                className="w-8"
-              />
-              <FaCircle className="home-color mr-1 text-xs" />
-            </div>
-            <h3 className="text-white">Goals</h3>
-            <div className="flex items-center">
-              <FaCircle className="away-color mr-1 text-xs" />
-              <img
-                src={data?.[0].teams.away.logo}
-                alt={data?.[0].teams.away.name}
-                className="w-8"
-              />
-            </div>
-          </div>
+          <SectionTitle data={data} title="Goals" />
           <p className="draw-bg rounded custom-gray italic p-3 text-center mx-auto mt-5 mb-5 text-sm md:mb-16">
             In order to clarify this data here for example -1.5 means that there
             will be a maximum of 1.5 goals in the game, i.e : 1 goal.
           </p>
-          <DoughnutChart data={data?.[0]?.predictions.goals} />
+          <DoughnutChart
+            data={data?.[0]?.predictions.goals}
+            labels={{ label1: "Home", label2: "Away" }}
+          />
         </div>
+        {/* Head to Head */}
         <div className="container dark-bg rounded  p-6">
-          <div className="chartHead flex items-center justify-between">
-            <div className="flex items-center">
-              <img
-                src={data?.[0].teams.home.logo}
-                alt={data?.[0].teams.home.name}
-                className="w-8"
-              />
-              <FaCircle className="home-color mr-1 text-xs" />
-            </div>
-            <h3 className="text-white">Head-to-Head</h3>
-            <div className="flex items-center">
-              <FaCircle className="away-color mr-1 text-xs" />
-              <img
-                src={data?.[0].teams.away.logo}
-                alt={data?.[0].teams.away.name}
-                className="w-8"
-              />
-            </div>
-          </div>
+          <SectionTitle data={data} title="Head to Head" />
           {data?.[0]?.h2h.map((prevGame, index) => {
             const className = index % 2 === 0 ? "draw-bg" : "no-bg";
-            return (
-              <div
-                className={`p-3 mt-6 rounded ${className}`}
-                key={prevGame.fixture.id}
-              >
-                <div className="flex">
-                  <div className="justify-center flex items-center w-1/4">
-                    <p className="custom-gray flex items-center text-sm">
-                      <FaRegClock className="mr-2" />{" "}
-                      {moment(prevGame.fixture.date).format("DD-MM-YYYY")}
-                    </p>
-                  </div>
-                  <div className="w-3/4 col-span-2">
-                    <div className="grid grid-cols-3 justify-items-center items-center">
-                      <p className="text-white">{prevGame.teams.away.name}</p>
-                      <p className="text-white flex flex-col justify-center text-center">
-                        <span className="text-xs custom-gray">
-                          ({prevGame.score.halftime.away} :{" "}
-                          {prevGame.score.halftime.home})
-                        </span>
-                        {prevGame.goals.away} : {prevGame.goals.home}
-                      </p>
-                      <p className="text-white">{prevGame.teams.home.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
+            return <HeadToHead prevGame={prevGame} className={className} />;
           })}
+        </div>
+        {/* Standings */}
+        <div className="container dark-bg rounded  p-6">
+          <SectionTitle data={data} title="Standings" />
+          <div className="container">
+            {standings &&
+              standings.map((standingsArray, index) => (
+                <Standings
+                  standingsArray={standingsArray}
+                  index={index}
+                  data={data}
+                />
+              ))}
+          </div>
         </div>
       </div>
     </div>

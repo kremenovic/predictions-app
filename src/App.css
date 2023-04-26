@@ -245,4 +245,8 @@ body {
     max-width: 100px;
     text-align: center;
    }
+
+   .mobileTableWidth {
+    width: 740px;
+   }
 }
