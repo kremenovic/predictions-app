@@ -35,7 +35,7 @@ const Standings = ({ standingsArray, index, data }) => {
                 {item.rank}.
               </td>
               <td
-                className={`w-40 text-center text-white py-2 ${
+                className={`w-52 text-center text-white py-2 ${
                   item.team.name === data?.[0].teams.away.name ||
                   item.team.name === data?.[0].teams.home.name
                     ? "dark-bg"
