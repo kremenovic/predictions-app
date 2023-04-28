@@ -10,13 +10,13 @@ import Predictions from "../../components/Predictions/Predictions";
 import DateFilter from "../../components/DateFilter/DateFilter";
 import MobileLeagues from "../../components/Leagues/MobileLeagues";
 import Loading from "../../components/Loading/Loading";
-import { selectGame } from "../../features/user/userSlice";
+import { selectGame } from "../../features/game/gameSlice";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const {
     selectedLeague: { id },
     selectedDate,
-  } = useSelector((store) => store.user);
+  } = useSelector((store) => store.game);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });

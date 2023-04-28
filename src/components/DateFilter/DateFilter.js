@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
-import { showCalendar, changeDate } from "../../features/user/userSlice";
+import { showCalendar, changeDate } from "../../features/game/gameSlice";
 import { FaCalendarAlt } from "react-icons/fa";
 const DateFilter = () => {
   const [currentDate, setCurrentDate] = useState();
   const dispatch = useDispatch();
-  const { isCalendarOpen, selectedDate } = useSelector((store) => store.user);
+  const { isCalendarOpen, selectedDate } = useSelector((store) => store.game);
   const toggle = () => {
     dispatch(showCalendar());
   };

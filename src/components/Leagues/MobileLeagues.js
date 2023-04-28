@@ -41,7 +41,7 @@ const MobileLeagues = () => {
   const {
     isMobileLeagueOpen,
     selectedLeague: { name, country },
-  } = useSelector((store) => store.user);
+  } = useSelector((store) => store.game);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleFilterClick = () => {

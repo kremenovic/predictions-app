@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectLeague, showMobileLeague } from "../../features/user/userSlice";
+import { selectLeague } from "../../features/game/gameSlice";
+import { showMobileLeague } from "../../features/user/userSlice";
 import leagues from "../../utils/leagues";
 const Leagues = ({ isMobile }) => {
   const dispatch = useDispatch();
-  const { selectedLeague } = useSelector((store) => store.user);
+  const { selectedLeague } = useSelector((store) => store.game);
   const handleLeagueClick = (id, leagueName, country) => {
     dispatch(selectLeague({ id, leagueName, country }));
     if (isMobile) {
