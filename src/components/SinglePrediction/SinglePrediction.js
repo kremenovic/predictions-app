@@ -262,6 +262,7 @@ const SinglePrediction = () => {
                           standingsArray={standingsArray}
                           index={index}
                           data={data}
+                          key={index}
                         />
                       ))}
                   </div>
