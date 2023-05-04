@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchSingleGameData } from "./singleGameThunk";
 import { fetchStandingsData } from "./standingsThunk";
+import { fetchLeagueGamesData } from "./leagueGamesThunk";
 
 const initialState = {
   selectedLeague: {
@@ -12,6 +13,7 @@ const initialState = {
   selectedGame: { date: null, referee: null, city: null, stadium: null },
   selectedDate: new Date().toISOString(),
   isCalendarOpen: false,
+  leagueGamesData: [],
   data: [],
   standingsData: [],
   loading: false,
@@ -50,6 +52,9 @@ const gameSlice = createSlice({
     setStandings: (state, { payload }) => {
       state.standingsData = payload;
     },
+    setLeagueGames: (state, { payload }) => {
+      state.leagueGamesData = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,6 +79,17 @@ const gameSlice = createSlice({
       .addCase(fetchStandingsData.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      })
+      .addCase(fetchLeagueGamesData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchLeagueGamesData.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.leagueGamesData = payload;
+      })
+      .addCase(fetchLeagueGamesData.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });
@@ -85,6 +101,7 @@ export const {
   changeDate,
   setData,
   setStandings,
+  setLeagueGames,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

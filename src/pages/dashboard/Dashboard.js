@@ -10,56 +10,39 @@ import Predictions from "../../components/Predictions/Predictions";
 import DateFilter from "../../components/DateFilter/DateFilter";
 import MobileLeagues from "../../components/Leagues/MobileLeagues";
 import Loading from "../../components/Loading/Loading";
-import { selectGame } from "../../features/game/gameSlice";
+import { selectGame, setLeagueGames } from "../../features/game/gameSlice";
+import { fetchLeagueGamesData } from "../../features/game/leagueGamesThunk";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const {
     selectedLeague: { id },
     selectedDate,
+    leagueGamesData: data,
+    loading,
   } = useSelector((store) => store.game);
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [data, setData] = useState(null);
+  // const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const formatedDate = moment(new Date(selectedDate)).format("YYYY-MM-DD");
   const handleLeagueSelection = (fixture) => {
     dispatch(selectGame({ fixture }));
   };
+
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(
-          `https://v3.football.api-sports.io/fixtures?league=${id}&season=2022&date=${formatedDate}`,
-          {
-            headers: {
-              "x-rapidapi-key": "af40d37b524e0e1b5bd6aba34f37dd40",
-              "x-rapidapi-host": "v3.football.api-sports.io",
-            },
-          }
-        );
-        const data = res.data.response;
-        localStorage.setItem(
-          `footballData-${id}-${formatedDate}`,
-          JSON.stringify(data)
-        );
-        setLoading(false);
-        return data;
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
-    };
     const storedData = localStorage.getItem(
       `footballData-${id}-${formatedDate}`
     );
     if (storedData) {
-      setData(JSON.parse(storedData));
-      console.log("ls");
+      dispatch(setLeagueGames(JSON.parse(storedData)));
     } else {
-      fetch().then((data) => setData(data));
-      console.log("fetch");
+      dispatch(
+        fetchLeagueGamesData({
+          id,
+          formatedDate,
+        })
+      );
     }
-  }, [id, formatedDate]);
+  }, [id, formatedDate, dispatch]);
 
   return (
     <div className="main-section flex flex-col gap-4 p-5 lg:flex-row">
@@ -76,8 +59,8 @@ const Dashboard = () => {
           {loading ? (
             <Loading />
           ) : (
-            data
-              ?.sort(
+            [...data]
+              .sort(
                 (a, b) => new Date(a.fixture.date) - new Date(b.fixture.date)
               )
               .map((single, index) => {

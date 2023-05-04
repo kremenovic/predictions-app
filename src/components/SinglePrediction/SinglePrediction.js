@@ -21,7 +21,7 @@ import { fetchSingleGameData } from "../../features/game/singleGameThunk";
 import { fetchStandingsData } from "../../features/game/standingsThunk";
 const SinglePrediction = () => {
   const dispatch = useDispatch();
-  // const [standingsData, setStandingsData] = useState(null);
+
   const [activeTab, setActiveTab] = useState("overview");
   const [activeHead, setActiveHead] = useState("all");
   const { selectedGame, selectedLeague, data, loading, error, standingsData } =
