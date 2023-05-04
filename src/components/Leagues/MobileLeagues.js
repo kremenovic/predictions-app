@@ -39,12 +39,13 @@ import {
 const MobileLeagues = () => {
   const dispatch = useDispatch();
   const {
-    isMobileLeagueOpen,
     selectedLeague: { name, country },
   } = useSelector((store) => store.game);
+  const { isMobileLeagueOpen } = useSelector((store) => store.user);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleFilterClick = () => {
+    console.log("mobile filter click");
     dispatch(showMobileLeague());
   };
 

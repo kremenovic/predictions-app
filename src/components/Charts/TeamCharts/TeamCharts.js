@@ -10,7 +10,6 @@ const TeamCharts = ({ data, team }) => {
   const [color2, setColor2] = useState();
   const [color3, setColor3] = useState();
 
-  console.log(data);
   const colors = () => {
     if (team === "home") {
       setColor1("#0F8DEB");
