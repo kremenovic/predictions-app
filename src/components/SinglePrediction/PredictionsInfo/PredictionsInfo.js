@@ -4,7 +4,7 @@ const PredictionsInfo = ({ data }) => {
   return (
     <div className="prediction-info ">
       <div className="advice flex flex-col max-w-3xl mx-auto justify-center items-center py-4">
-        <h1 className="custom-gray">
+        <h1 className="custom-gray text-center md:text-left">
           Who will win {data?.[0].teams.home.name} or{" "}
           {data?.[0].teams.away.name}?
         </h1>

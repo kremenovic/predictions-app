@@ -5,14 +5,14 @@ import { FaRegClock } from "react-icons/fa";
 const HeadToHead = ({ prevGame, className }) => {
   return (
     <div className={`p-3 mt-6 rounded ${className}`} key={prevGame.fixture.id}>
-      <div className="flex">
-        <div className="justify-center flex items-center w-1/4">
+      <div className="flex flex-col items-center md:flex-row">
+        <div className="justify-center flex items-center w-full mb-4 md:w-1/4 md:mb-0">
           <p className="custom-gray flex items-center text-sm">
             <FaRegClock className="mr-2" />{" "}
             {moment(prevGame.fixture.date).format("DD-MM-YYYY")}
           </p>
         </div>
-        <div className="w-3/4 col-span-2">
+        <div className="w-full col-span-2 md:w-3/4">
           <div className="grid grid-cols-3 justify-items-center items-center">
             <p className="text-white">{prevGame.teams.away.name}</p>
             <p className="text-white flex flex-col justify-center text-center">

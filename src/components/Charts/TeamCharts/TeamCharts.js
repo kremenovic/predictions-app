@@ -163,35 +163,35 @@ const TeamCharts = ({ data, team }) => {
   return (
     <div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded p-4 md:p-6">
           <h2 className="text-white mb-6">Goals For</h2>
           <Bar data={goalsForBarData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Goals Against</h2>
           <Bar data={goalsAgainstBarData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Yellow Cards</h2>
           <Line data={yellowCardsAreaData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Red Cards</h2>
           <Line data={redCardsAreaData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Wins & Loses</h2>
           <Bar data={winsLosesBarData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Clean Sheets</h2>
           <Bar data={cleanSheetBarData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Penalties</h2>
           <Bar data={penaltyBarData} options={chartOptions} />
         </div>
-        <div className=" dark-bg rounded  p-6">
+        <div className=" dark-bg rounded  p-4 md:p-6">
           <h2 className="text-white mb-6">Formations</h2>
           <Bar data={formationsBarData} options={chartOptions} />
         </div>
