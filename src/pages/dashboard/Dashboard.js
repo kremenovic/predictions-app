@@ -20,8 +20,6 @@ const Dashboard = () => {
     leagueGamesData: data,
     loading,
   } = useSelector((store) => store.game);
-  // const [data, setData] = useState(null);
-  // const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const formatedDate = moment(new Date(selectedDate)).format("YYYY-MM-DD");
   const handleLeagueSelection = (fixture) => {
