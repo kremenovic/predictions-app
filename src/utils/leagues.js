@@ -30,8 +30,22 @@ import {
   slovakia,
   spain,
   turkey,
+  uefa,
+  uefaEuropa,
 } from "../assets/leagues/countries";
 const leagues = [
+  {
+    id: 2,
+    leagueName: "UEFA Champions League",
+    countryName: "uefa",
+    path: uefa,
+  },
+  {
+    id: 3,
+    leagueName: "UEFA  Europa League",
+    countryName: "uefaEuropa",
+    path: uefaEuropa,
+  },
   {
     id: 310,
     leagueName: "Superliga",

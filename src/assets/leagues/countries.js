@@ -29,6 +29,8 @@ import slovenia from "./country-si.svg";
 import slovakia from "./country-sk.svg";
 import spain from "./country-sp.svg";
 import turkey from "./country-tu.svg";
+import uefa from "./uefa.png";
+import uefaEuropa from "./uefa-europa.png";
 
 export {
   albania,
@@ -62,4 +64,6 @@ export {
   slovakia,
   spain,
   turkey,
+  uefa,
+  uefaEuropa,
 };

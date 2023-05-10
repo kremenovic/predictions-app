@@ -35,6 +35,8 @@ import {
   slovakia,
   spain,
   turkey,
+  uefa,
+  uefaEuropa,
 } from "../../assets/leagues/countries";
 const MobileLeagues = () => {
   const dispatch = useDispatch();
@@ -81,6 +83,8 @@ const MobileLeagues = () => {
     slovakia,
     spain,
     turkey,
+    uefa,
+    uefaEuropa,
   };
 
   const countryImage = countryObject[country];
