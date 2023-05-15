@@ -92,29 +92,15 @@ body {
   color: #8a8a8a;
 }
 
-.dropdown {
-  position: absolute;
-  top: 45px;
-  left: 0;
-  visibility: hidden;
-  width: 100%;
-  opacity: 0;
-}
 
-.dropdown.show {
-  visibility: inherit;
-  opacity:1;
-  transition: visibility 0.2s linear,opacity 0.2s linear;
-}
-
-.dropdown.show button {
+.show button {
   background-color: #E72641;
   width: 100%;
   justify-content: center;
   color: #fff;
 }
 
-.dropdown.show button:hover {
+.show button:hover {
   background-color: #f1465e;
 }
 

@@ -6,8 +6,6 @@ import Logo from "../../assets/logo.svg";
 import { useDispatch } from "react-redux";
 import { showMobileNav } from "../../features/user/userSlice";
 import NavigationLinks from "./NavigationLinks";
-
-import DarkMode from "./DarkMode";
 import Logout from "./Logout";
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,17 +23,18 @@ const Header = () => {
           </h3>
         </Link>
       </div>
-      {!isMobile ? (
-        <NavigationLinks />
-      ) : (
+      {!isMobile ? null : (
         <button type="button" onClick={toggle}>
-          <FaBars className="mr-8 text-3xl hamburger-icon" />
+          <FaBars className="text-3xl hamburger-icon " />
         </button>
       )}
-      <div className="flex items-center">
-        <Logout />
-        <DarkMode />
-      </div>
+      {!isMobile ? (
+        <div className="flex items-center">
+          <Logout />
+        </div>
+      ) : (
+        ""
+      )}
     </header>
   );
 };

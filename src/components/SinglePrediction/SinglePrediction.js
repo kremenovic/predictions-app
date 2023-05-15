@@ -86,12 +86,6 @@ const SinglePrediction = () => {
                 <FaLongArrowAltLeft className="mr-2" /> Back
               </Link>
             </div>
-
-            <div className="placeBet">
-              <button className="text-white bg btn away-bg px-4 hover:opacity-90 transition-all duration-200">
-                Add to bank
-              </button>
-            </div>
           </div>
           <div className="flex flex-col pt-4 pb-4 border-b custom-border">
             <div className="text-center flex justify-between items-center flex-col max-w-5xl w-full mx-auto mb-16 md:flex-row">

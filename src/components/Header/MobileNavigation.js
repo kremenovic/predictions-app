@@ -2,7 +2,7 @@ import React from "react";
 import { FaWindowClose } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { showMobileNav } from "../../features/user/userSlice";
-
+import Logout from "./Logout";
 import NavigationLinks from "./NavigationLinks";
 const MobileNavigation = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const MobileNavigation = () => {
           <FaWindowClose />
         </button>
         <NavigationLinks />
+        <Logout />
       </div>
     </div>
   );
