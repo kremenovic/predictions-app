@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Leagues from "../../components/Leagues/Leagues";
 import Banner from "../../components/Banner/Banner";
