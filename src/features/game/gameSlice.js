@@ -8,7 +8,7 @@ const initialState = {
         id: 39,
         name: "Premier League",
         country: "england",
-        season: 2022,
+        season: 2023,
     },
     selectedGame: { date: null, referee: null, city: null, stadium: null },
     selectedDate: new Date().toISOString(),
@@ -47,7 +47,7 @@ const gameSlice = createSlice({
         },
         showCalendar: (state) => {
             state.isCalendarOpen = !state.isCalendarOpen;
-            console.log(new Date().toISOString());
+            // console.log(new Date().toISOString());
         },
         changeDate: (state, { payload }) => {
             state.selectedDate = payload;

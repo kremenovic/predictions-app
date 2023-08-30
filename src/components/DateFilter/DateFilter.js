@@ -33,15 +33,15 @@ const DateFilter = () => {
     return (
         <div className="relative w-full lg:w-auto">
             <div
-                className="relative cursor-pointer mt-2 w-full lg:w-auto lg:mt-0"
-                onClick={toggle}
+                className="cursor-pointer mt-2 w-full lg:w-auto lg:mt-0"
+                onClick={() => toggle()}
             >
                 <input
                     type="text"
                     id="issueDate"
-                    className="border dark-bg cursor-pointer relative h-12 mt-2 w-full custom-gray px-3 focus:outline-none focus:border-purple-500 rounded-lg"
+                    className="border dark-bg cursor-pointer relative h-12 mt-2 w-full custom-gray px-3 focus:outline-none  rounded-lg"
                     value={moment(selectedDate).format("DD MMM YYYY")}
-                    disabled
+                    readOnly
                 />
                 <FaCalendarAlt className="absolute center-icon custom-gray text-sm" />
             </div>

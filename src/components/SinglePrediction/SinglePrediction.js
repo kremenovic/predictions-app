@@ -49,31 +49,20 @@ const SinglePrediction = () => {
     };
 
     useEffect(() => {
-        const storedData = localStorage.getItem(`footballDataSingle-${id}`);
-        if (storedData) {
-            dispatch(setData(JSON.parse(storedData)));
+        const footballDataSingle = localStorage.getItem(
+            `footballDataSingle-${id}`
+        );
+        if (footballDataSingle) {
+            dispatch(setData(JSON.parse(footballDataSingle)));
         } else {
             dispatch(fetchSingleGameData(id));
         }
 
-        const storedSelectedData = localStorage.getItem(`footballSelected`);
-        if (storedSelectedData) {
-            localStorage.setItem(JSON.parse(selectedGame));
-        }
-    }, [id, dispatch]);
-
-    useEffect(() => {
-        const storedData = localStorage.getItem(
+        const StandingsData = localStorage.getItem(
             `Standings-${selectedLeague.id}-${selectedLeague.season}`
         );
-        const storedSelectedGame = localStorage.getItem("selectedGame");
-        localStorage.setItem("selectedGame", JSON.stringify(selectedGame));
-        if (storedSelectedGame) {
-            // Update the selectedGame in store.game with the retrieved value
-            dispatch(setSelectedGame(JSON.parse(storedSelectedGame)));
-        }
-        if (storedData) {
-            dispatch(setStandings(JSON.parse(storedData)));
+        if (StandingsData) {
+            dispatch(setStandings(JSON.parse(StandingsData)));
         } else {
             dispatch(
                 fetchStandingsData({
