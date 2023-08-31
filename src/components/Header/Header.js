@@ -8,35 +8,37 @@ import { showMobileNav } from "../../features/user/userSlice";
 import NavigationLinks from "./NavigationLinks";
 import Logout from "./Logout";
 const Header = () => {
-  const dispatch = useDispatch();
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-  const toggle = () => {
-    dispatch(showMobileNav());
-  };
-  return (
-    <header className="flex items-center justify-between py-7 px-6 dark-bg">
-      <div className="flex items-center">
-        <Link className="flex items-center">
-          <img src={Logo} alt="Logo" className="h-8" />
-          <h3 className="ml-3 text-white font-bold text-2xl">
-            {!isMobile ? "MatchMate.io" : null}
-          </h3>
-        </Link>
-      </div>
-      {!isMobile ? null : (
-        <button type="button" onClick={toggle}>
-          <FaBars className="text-3xl hamburger-icon " />
-        </button>
-      )}
-      {!isMobile ? (
-        <div className="flex items-center">
-          <Logout />
-        </div>
-      ) : (
-        ""
-      )}
-    </header>
-  );
+    const dispatch = useDispatch();
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const toggle = () => {
+        dispatch(showMobileNav());
+    };
+    return (
+        <header className="flex items-center justify-between py-7 px-6 dark-bg">
+            <div className="flex items-center">
+                <Link className="flex items-center">
+                    <img src={Logo} alt="Logo" className="h-8" />
+                    <h3 className="ml-3 text-white font-bold text-2xl">
+                        {!isMobile ? "MatchMate.io" : null}
+                    </h3>
+                </Link>
+            </div>
+            {!isMobile ? (
+                <NavigationLinks />
+            ) : (
+                <button type="button" onClick={toggle}>
+                    <FaBars className="text-3xl hamburger-icon " />
+                </button>
+            )}
+            {!isMobile ? (
+                <div className="flex items-center">
+                    <Logout />
+                </div>
+            ) : (
+                ""
+            )}
+        </header>
+    );
 };
 
 export default Header;
