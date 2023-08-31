@@ -47,7 +47,6 @@ const gameSlice = createSlice({
         },
         showCalendar: (state) => {
             state.isCalendarOpen = !state.isCalendarOpen;
-            // console.log(new Date().toISOString());
         },
         changeDate: (state, { payload }) => {
             state.selectedDate = payload;

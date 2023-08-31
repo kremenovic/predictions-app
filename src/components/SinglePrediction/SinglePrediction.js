@@ -21,7 +21,7 @@ import { fetchSingleGameData } from "../../features/game/singleGameThunk";
 import { fetchStandingsData } from "../../features/game/standingsThunk";
 const SinglePrediction = () => {
     const dispatch = useDispatch();
-
+    const [selectedGameInfo, setSelectedGameInfo] = useState();
     const [activeTab, setActiveTab] = useState("overview");
     const [activeHead, setActiveHead] = useState("all");
     const {
@@ -49,6 +49,7 @@ const SinglePrediction = () => {
     };
 
     useEffect(() => {
+        // Single Game Data
         const footballDataSingle = localStorage.getItem(
             `footballDataSingle-${id}`
         );
@@ -58,9 +59,23 @@ const SinglePrediction = () => {
             dispatch(fetchSingleGameData(id));
         }
 
+        // Selected Game Data
+        // keeps data on refresh date, city, stadium
+        const selectedGameData = localStorage.getItem(`selectedGame-${id}`);
+        if (selectedGameData) {
+            setSelectedGameInfo(JSON.parse(selectedGameData));
+        } else {
+            localStorage.setItem(
+                `selectedGame-${id}`,
+                JSON.stringify(selectedGame)
+            );
+        }
+
+        // Gets standings data from API
         const StandingsData = localStorage.getItem(
             `Standings-${selectedLeague.id}-${selectedLeague.season}`
         );
+        console.log(JSON.parse(StandingsData));
         if (StandingsData) {
             dispatch(setStandings(JSON.parse(StandingsData)));
         } else {
@@ -101,19 +116,20 @@ const SinglePrediction = () => {
                             <div className="flex items-center custom-gray mb-5 flex-col md:flex-row md:mb-0">
                                 <FaRegClock className="mr-2" />
                                 <p>
-                                    {moment(selectedGame.date).format(
+                                    {moment(selectedGameInfo?.date).format(
                                         "DD-MM-YYYY"
                                     )}{" "}
                                     -{" "}
                                     <Moment format="h:mm z" tz="CET">
-                                        {selectedGame.date}
+                                        {selectedGameInfo?.date}
                                     </Moment>
                                 </p>
                             </div>
                             <div className="flex items-center custom-gray flex-col md:flex-row">
                                 <GiSoccerField className="mr-2" />
                                 <p>
-                                    {selectedGame.stadium}, {selectedGame.city}
+                                    {selectedGameInfo?.stadium},{" "}
+                                    {selectedGameInfo?.city}
                                 </p>
                             </div>
                         </div>
