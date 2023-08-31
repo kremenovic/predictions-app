@@ -7,7 +7,9 @@ const Leagues = ({ isMobile }) => {
     const dispatch = useDispatch();
     const { selectedLeague } = useSelector((store) => store.game);
     const [currentLeague, setCurrentLeague] = useState();
-
+    const handleLeagueClick = (id, leagueName, country) => {
+        setCurrentLeague(id, leagueName, country);
+    };
     useEffect(() => {
         const savedLeague = JSON.parse(localStorage.getItem("selectedGame"));
         if (savedLeague) {
@@ -18,7 +20,10 @@ const Leagues = ({ isMobile }) => {
             localStorage.setItem("selectedGame", JSON.stringify(currentLeague));
             dispatch(selectLeague(currentLeague));
         }
-    }, [currentLeague, dispatch]);
+        if (isMobile) {
+            dispatch(showMobileLeague());
+        }
+    }, [currentLeague, dispatch, showMobileLeague]);
 
     return (
         <section className="leagues w-full rounded p-5 dark-bg h-fit lg:w-3/12">
@@ -37,7 +42,7 @@ const Leagues = ({ isMobile }) => {
                             key={id}
                             className={`flex cursor-pointer pb-4 last:pb-0 hover:translate-x-1 transition-all duration-300 ${active}`}
                             onClick={() => {
-                                setCurrentLeague({
+                                handleLeagueClick({
                                     id,
                                     leagueName,
                                     country,
