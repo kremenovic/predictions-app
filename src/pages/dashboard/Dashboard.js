@@ -34,7 +34,6 @@ const Dashboard = () => {
             `footballData-${id}-${formatedDate}`
         );
 
-        console.log(formatedDate);
         if (storedData) {
             dispatch(setLeagueGames(JSON.parse(storedData)));
         } else {
