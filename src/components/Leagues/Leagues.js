@@ -24,7 +24,7 @@ const Leagues = ({ isMobile }) => {
             dispatch(selectLeague(currentLeague));
         }
         if (isMobile) {
-            dispatch(showMobileLeague());
+            // dispatch(showMobileLeague());
         }
     }, [currentLeague, dispatch, showMobileLeague]);
 

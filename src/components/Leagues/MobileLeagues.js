@@ -16,7 +16,6 @@ const MobileLeagues = () => {
     const handleFilterClick = () => {
         console.log("mobile filter click");
         dispatch(showMobileLeague());
-        console.log(isMobileLeagueOpen);
     };
 
     useEffect(() => {
@@ -60,7 +59,7 @@ const MobileLeagues = () => {
                     <div className="flex">
                         <button
                             className="btn filter-btn tracking-wider"
-                            onClick={() => handleFilterClick()}
+                            onClick={handleFilterClick}
                         >
                             Filter
                         </button>
