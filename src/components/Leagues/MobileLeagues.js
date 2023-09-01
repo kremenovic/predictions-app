@@ -59,7 +59,7 @@ const MobileLeagues = () => {
                     <div className="flex">
                         <button
                             className="btn filter-btn tracking-wider"
-                            onClick={handleFilterClick}
+                            onClick={() => handleFilterClick()}
                         >
                             Filter
                         </button>
