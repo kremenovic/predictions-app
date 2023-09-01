@@ -7,17 +7,20 @@ const Leagues = ({ isMobile }) => {
     const dispatch = useDispatch();
     const { selectedLeague } = useSelector((store) => store.game);
     const [currentLeague, setCurrentLeague] = useState();
-    const handleLeagueClick = (id, leagueName, country) => {
-        setCurrentLeague(id, leagueName, country);
+    const handleLeagueClick = (id, leagueName, country, path) => {
+        setCurrentLeague(id, leagueName, country, path);
     };
     useEffect(() => {
-        const savedLeague = JSON.parse(localStorage.getItem("selectedGame"));
+        const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
         if (savedLeague) {
             dispatch(selectLeague(savedLeague));
         }
 
         if (currentLeague) {
-            localStorage.setItem("selectedGame", JSON.stringify(currentLeague));
+            localStorage.setItem(
+                "selectedLeague",
+                JSON.stringify(currentLeague)
+            );
             dispatch(selectLeague(currentLeague));
         }
         if (isMobile) {
@@ -46,6 +49,7 @@ const Leagues = ({ isMobile }) => {
                                     id,
                                     leagueName,
                                     country,
+                                    path,
                                 });
                             }}
                         >

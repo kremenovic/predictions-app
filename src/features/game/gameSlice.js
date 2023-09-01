@@ -9,6 +9,7 @@ const initialState = {
         name: "Premier League",
         country: "england",
         season: 2023,
+        path: null,
     },
     selectedGame: { date: null, referee: null, city: null, stadium: null },
     selectedDate: new Date().toISOString(),
@@ -25,12 +26,13 @@ const gameSlice = createSlice({
     initialState,
     reducers: {
         selectLeague: (state, { payload }) => {
-            const { id, leagueName: name, country } = payload;
+            const { id, leagueName: name, country, path } = payload;
             state.selectedLeague = {
                 ...state.selectedLeague,
                 id,
                 name,
                 country,
+                path,
             };
         },
         selectGame: (state, { payload }) => {
