@@ -35,11 +35,6 @@ const Dashboard = () => {
             `footballData-${id}-${formatedDate}`
         );
 
-        const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
-        if (savedLeague) {
-            dispatch(selectLeague(savedLeague));
-        }
-
         if (storedData) {
             dispatch(setLeagueGames(JSON.parse(storedData)));
         } else {

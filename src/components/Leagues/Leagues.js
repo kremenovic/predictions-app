@@ -7,29 +7,12 @@ const Leagues = ({ isMobile }) => {
     const dispatch = useDispatch();
     const { selectedLeague } = useSelector((store) => store.game);
 
-    const [currentLeague, setCurrentLeague] = useState();
-
     const handleLeagueClick = async (id, leagueName, country, path) => {
-        await setCurrentLeague(id, leagueName, country, path);
+        await dispatch(selectLeague(id, leagueName, country, path));
         if (isMobile) {
-            dispatch(showMobileLeague());
+            await dispatch(showMobileLeague());
         }
     };
-
-    useEffect(() => {
-        const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
-        if (savedLeague) {
-            dispatch(selectLeague(savedLeague));
-        }
-
-        if (currentLeague) {
-            localStorage.setItem(
-                "selectedLeague",
-                JSON.stringify(currentLeague)
-            );
-            dispatch(selectLeague(currentLeague));
-        }
-    }, [currentLeague, dispatch, showMobileLeague]);
 
     return (
         <section className="leagues w-full rounded p-5 dark-bg h-fit lg:w-3/12">

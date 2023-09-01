@@ -11,45 +11,39 @@ const MobileLeagues = () => {
     } = useSelector((store) => store.game);
     const { isMobileLeagueOpen } = useSelector((store) => store.user);
     const isMobile = useMediaQuery({ maxWidth: 767 });
-    const [currentMobileLeague, setCurrentMobileLeague] = useState();
+    const [defaultPath, setDefaultPath] = useState();
 
     const handleFilterClick = () => {
         dispatch(showMobileLeague());
     };
 
     useEffect(() => {
-        const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
-        if (savedLeague) {
-            setCurrentMobileLeague(savedLeague);
-        }
-        if (!currentMobileLeague) {
+        if (!path) {
             const getPath = leagues.filter((pathLink) => {
                 if (pathLink.countryName == country) {
                     return pathLink;
                 }
             });
-            setCurrentMobileLeague({
-                leagueName,
-                country,
+            setDefaultPath({
                 path: getPath[0]?.path,
             });
         }
-    }, [isMobileLeagueOpen, leagueName]);
+    }, []);
 
     return (
         <>
             <div className="flex justify-between w-full mb-2">
                 <div className="flex items-center">
                     <img
-                        src={currentMobileLeague?.path}
+                        src={path || defaultPath?.path}
                         alt=""
                         className="w-6 mr-2 lg:w-8"
                     />
                     <div className="flex flex-col">
                         <h4 className="text-white text-base w-max lg:text-lg">
-                            {currentMobileLeague?.leagueName}{" "}
+                            {leagueName}{" "}
                             <sup className="custom-gray text-xs capitalize">
-                                {currentMobileLeague?.country}
+                                {country}
                             </sup>
                         </h4>
                     </div>
