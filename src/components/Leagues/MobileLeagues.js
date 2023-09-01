@@ -22,7 +22,7 @@ const MobileLeagues = () => {
         if (savedLeague) {
             setCurrentMobileLeague(savedLeague);
         }
-        if (!savedLeague) {
+        if (!currentMobileLeague) {
             const getPath = leagues.filter((pathLink) => {
                 if (pathLink.countryName == country) {
                     return pathLink;
@@ -34,7 +34,7 @@ const MobileLeagues = () => {
                 path: getPath[0]?.path,
             });
         }
-    }, [dispatch, leagueName, isMobileLeagueOpen]);
+    }, [isMobileLeagueOpen, leagueName]);
 
     return (
         <>

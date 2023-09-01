@@ -12,6 +12,7 @@ import Loading from "../../components/Loading/Loading";
 import {
     selectGame,
     setLeagueGames,
+    selectLeague,
     setData,
 } from "../../features/game/gameSlice";
 import { fetchLeagueGamesData } from "../../features/game/leagueGamesThunk";
@@ -33,6 +34,11 @@ const Dashboard = () => {
         const storedData = localStorage.getItem(
             `footballData-${id}-${formatedDate}`
         );
+
+        const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
+        if (savedLeague) {
+            dispatch(selectLeague(savedLeague));
+        }
 
         if (storedData) {
             dispatch(setLeagueGames(JSON.parse(storedData)));
