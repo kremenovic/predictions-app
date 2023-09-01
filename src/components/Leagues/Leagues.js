@@ -6,10 +6,16 @@ import leagues from "../../utils/leagues";
 const Leagues = ({ isMobile }) => {
     const dispatch = useDispatch();
     const { selectedLeague } = useSelector((store) => store.game);
+
     const [currentLeague, setCurrentLeague] = useState();
-    const handleLeagueClick = (id, leagueName, country, path) => {
-        setCurrentLeague(id, leagueName, country, path);
+
+    const handleLeagueClick = async (id, leagueName, country, path) => {
+        await setCurrentLeague(id, leagueName, country, path);
+        if (isMobile) {
+            dispatch(showMobileLeague());
+        }
     };
+
     useEffect(() => {
         const savedLeague = JSON.parse(localStorage.getItem("selectedLeague"));
         if (savedLeague) {
@@ -22,9 +28,6 @@ const Leagues = ({ isMobile }) => {
                 JSON.stringify(currentLeague)
             );
             dispatch(selectLeague(currentLeague));
-        }
-        if (isMobile) {
-            // dispatch(showMobileLeague());
         }
     }, [currentLeague, dispatch, showMobileLeague]);
 

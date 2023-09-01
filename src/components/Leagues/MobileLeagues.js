@@ -14,7 +14,6 @@ const MobileLeagues = () => {
     const [currentMobileLeague, setCurrentMobileLeague] = useState();
 
     const handleFilterClick = () => {
-        console.log("mobile filter click");
         dispatch(showMobileLeague());
     };
 
@@ -35,7 +34,7 @@ const MobileLeagues = () => {
                 path: getPath[0]?.path,
             });
         }
-    }, [dispatch, leagueName]);
+    }, [dispatch, leagueName, isMobileLeagueOpen]);
 
     return (
         <>
