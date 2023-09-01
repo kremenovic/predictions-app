@@ -12,6 +12,7 @@ import Loading from "../../components/Loading/Loading";
 import {
     selectGame,
     setLeagueGames,
+    selectLeague,
     setData,
 } from "../../features/game/gameSlice";
 import { fetchLeagueGamesData } from "../../features/game/leagueGamesThunk";

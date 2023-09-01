@@ -236,4 +236,8 @@ body {
    .mobileTableWidth {
     width: 740px;
    }
+
+   .center-icon {
+    top: 60%;
+   }
 }

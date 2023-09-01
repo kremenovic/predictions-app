@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectLeague } from "../../features/game/gameSlice";
 import { showMobileLeague } from "../../features/user/userSlice";
@@ -6,19 +6,13 @@ import leagues from "../../utils/leagues";
 const Leagues = ({ isMobile }) => {
     const dispatch = useDispatch();
     const { selectedLeague } = useSelector((store) => store.game);
-    const [currentLeague, setCurrentLeague] = useState();
 
-    useEffect(() => {
-        const savedLeague = JSON.parse(localStorage.getItem("selectedGame"));
-        if (savedLeague) {
-            dispatch(selectLeague(savedLeague));
+    const handleLeagueClick = async (id, leagueName, country, path) => {
+        await dispatch(selectLeague(id, leagueName, country, path));
+        if (isMobile) {
+            await dispatch(showMobileLeague());
         }
-
-        if (currentLeague) {
-            localStorage.setItem("selectedGame", JSON.stringify(currentLeague));
-            dispatch(selectLeague(currentLeague));
-        }
-    }, [currentLeague, dispatch]);
+    };
 
     return (
         <section className="leagues w-full rounded p-5 dark-bg h-fit lg:w-3/12">
@@ -37,10 +31,11 @@ const Leagues = ({ isMobile }) => {
                             key={id}
                             className={`flex cursor-pointer pb-4 last:pb-0 hover:translate-x-1 transition-all duration-300 ${active}`}
                             onClick={() => {
-                                setCurrentLeague({
+                                handleLeagueClick({
                                     id,
                                     leagueName,
                                     country,
+                                    path,
                                 });
                             }}
                         >
