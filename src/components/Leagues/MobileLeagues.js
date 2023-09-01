@@ -16,6 +16,7 @@ const MobileLeagues = () => {
     const handleFilterClick = () => {
         console.log("mobile filter click");
         dispatch(showMobileLeague());
+        console.log(isMobileLeagueOpen);
     };
 
     useEffect(() => {
