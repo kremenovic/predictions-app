@@ -39,7 +39,7 @@ const MobileLeagues = () => {
 
     return (
         <>
-            <div className="flex justify-between w-full mb-2 asadad">
+            <div className="flex justify-between w-full mb-2">
                 <div className="flex items-center">
                     <img
                         src={currentMobileLeague?.path}
@@ -66,7 +66,8 @@ const MobileLeagues = () => {
                     </div>
                 ) : null}
             </div>
-            {isMobileLeagueOpen && <Leagues isMobile={isMobile} />}
+            {/* {isMobileLeagueOpen && <Leagues isMobile={isMobile} />} */}
+            {isMobileLeagueOpen ? <Leagues isMobile={isMobile} /> : null}
         </>
     );
 };
