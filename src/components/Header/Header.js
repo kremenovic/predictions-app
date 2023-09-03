@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <header className="flex items-center justify-between py-7 px-6 dark-bg">
             <div className="flex items-center">
-                <Link className="flex items-center">
+                <Link className="flex items-center" to="/dashboard">
                     <img src={Logo} alt="Logo" className="h-8" />
                     <h3 className="ml-3 text-white font-bold text-2xl">
                         {!isMobile ? "MatchMate.io" : null}

@@ -15,10 +15,11 @@ export const fetchSingleGameData = createAsyncThunk(
                 }
             );
             const data = res.data.response;
-            localStorage.setItem(
-                `footballDataSingle-${id}`,
-                JSON.stringify(data)
-            );
+
+            // localStorage.setItem(
+            //     `footballDataSingle-${id}`,
+            //     JSON.stringify(data)
+            // );
             return data;
         } catch (error) {
             console.log(error);
