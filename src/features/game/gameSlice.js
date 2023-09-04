@@ -19,6 +19,7 @@ const initialState = {
     standingsData: [],
     loading: false,
     error: null,
+    isStateInitializedFromLocalStorage: false,
 };
 
 const gameSlice = createSlice({

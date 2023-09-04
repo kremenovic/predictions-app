@@ -31,26 +31,26 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        dispatch(
-            fetchLeagueGamesData({
-                id,
-                formatedDate,
-            })
-        );
-        // const storedData = localStorage.getItem(
-        //     `footballData-${id}-${formatedDate}`
+        // dispatch(
+        //     fetchLeagueGamesData({
+        //         id,
+        //         formatedDate,
+        //     })
         // );
+        const storedData = localStorage.getItem(
+            `footballData-${id}-${formatedDate}`
+        );
 
-        // if (storedData) {
-        //     dispatch(setLeagueGames(JSON.parse(storedData)));
-        // } else {
-        //     dispatch(
-        //         fetchLeagueGamesData({
-        //             id,
-        //             formatedDate,
-        //         })
-        //     );
-        // }
+        if (storedData) {
+            dispatch(setLeagueGames(JSON.parse(storedData)));
+        } else {
+            dispatch(
+                fetchLeagueGamesData({
+                    id,
+                    formatedDate,
+                })
+            );
+        }
     }, [id, formatedDate, dispatch]);
 
     return (

@@ -30,6 +30,7 @@ const SinglePrediction = () => {
         loading,
         error,
         standingsData,
+        isStateInitializedFromLocalStorage,
     } = useSelector((store) => store.game);
     const { id } = useParams();
     const fieldMap = {
@@ -48,13 +49,15 @@ const SinglePrediction = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchSingleGameData(id));
-        dispatch(
-            fetchStandingsData({
-                leagueID: selectedLeague.id,
-                leagueSeason: selectedLeague.season,
-            })
-        );
+        if (isStateInitializedFromLocalStorage) {
+            dispatch(fetchSingleGameData(id));
+            dispatch(
+                fetchStandingsData({
+                    leagueID: selectedLeague.id,
+                    leagueSeason: selectedLeague.season,
+                })
+            );
+        }
         // // Single Game Data
         // const footballDataSingle = localStorage.getItem(
         //     `footballDataSingle-${id}`
@@ -90,7 +93,7 @@ const SinglePrediction = () => {
         //         })
         //     );
         // }
-    }, [id, dispatch]);
+    }, [isStateInitializedFromLocalStorage, id, dispatch]);
 
     const standings = standingsData?.[0]?.league?.standings;
 

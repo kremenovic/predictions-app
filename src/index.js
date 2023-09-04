@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import store from "./store";
 import { Provider } from "react-redux";
+import { loadState } from "./utils/localStorage";
+loadState();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
