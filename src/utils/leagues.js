@@ -32,6 +32,7 @@ import {
     turkey,
     uefa,
     uefaEuropa,
+    euroQualification,
 } from "../assets/leagues/countries";
 const leagues = [
     // {
@@ -46,6 +47,12 @@ const leagues = [
     //   countryName: "uefaEuropa",
     //   path: uefaEuropa,
     // },
+    {
+        id: 960,
+        leagueName: "Euro Qualification",
+        countryName: "euroQualification",
+        path: uefa,
+    },
     {
         id: 310,
         leagueName: "Superliga",

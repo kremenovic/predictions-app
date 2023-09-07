@@ -23,9 +23,9 @@ const DateFilter = () => {
         setCurrentDate(newDate);
     };
 
-    // const tileDisabled = ({ date }) => {
-    //   return date < currentDate;
-    // };
+    const tileDisabled = ({ date }) => {
+        return date < currentDate;
+    };
 
     useEffect(() => {
         getYesterday();
@@ -54,9 +54,9 @@ const DateFilter = () => {
                     <Calendar
                         onChange={handleChangeDate}
                         value={new Date(selectedDate)}
-                        // showNavigation={false}
+                        showNavigation={false}
                         showNeighboringMonth={false}
-                        // tileDisabled={tileDisabled}
+                        tileDisabled={tileDisabled}
                     />
                 </div>
             </div>

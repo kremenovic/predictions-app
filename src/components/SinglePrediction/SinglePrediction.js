@@ -21,7 +21,6 @@ import { fetchSingleGameData } from "../../features/game/singleGameThunk";
 import { fetchStandingsData } from "../../features/game/standingsThunk";
 const SinglePrediction = () => {
     const dispatch = useDispatch();
-    const [selectedGameInfo, setSelectedGameInfo] = useState();
     const [activeTab, setActiveTab] = useState("overview");
     const [activeHead, setActiveHead] = useState("all");
     const {
@@ -31,6 +30,7 @@ const SinglePrediction = () => {
         loading,
         error,
         standingsData,
+        isStateInitializedFromLocalStorage,
     } = useSelector((store) => store.game);
     const { id } = useParams();
     const fieldMap = {
@@ -49,36 +49,8 @@ const SinglePrediction = () => {
     };
 
     useEffect(() => {
-        // Single Game Data
-        const footballDataSingle = localStorage.getItem(
-            `footballDataSingle-${id}`
-        );
-        if (footballDataSingle) {
-            dispatch(setData(JSON.parse(footballDataSingle)));
-        } else {
+        if (isStateInitializedFromLocalStorage) {
             dispatch(fetchSingleGameData(id));
-        }
-
-        // Selected Game Data
-        // keeps data on refresh date, city, stadium
-        const selectedGameData = localStorage.getItem(`selectedGame-${id}`);
-        if (selectedGameData) {
-            setSelectedGameInfo(JSON.parse(selectedGameData));
-        } else {
-            localStorage.setItem(
-                `selectedGame-${id}`,
-                JSON.stringify(selectedGame)
-            );
-        }
-
-        // Gets standings data from API
-        const StandingsData = localStorage.getItem(
-            `Standings-${selectedLeague.id}-${selectedLeague.season}`
-        );
-        console.log(JSON.parse(StandingsData));
-        if (StandingsData) {
-            dispatch(setStandings(JSON.parse(StandingsData)));
-        } else {
             dispatch(
                 fetchStandingsData({
                     leagueID: selectedLeague.id,
@@ -86,7 +58,7 @@ const SinglePrediction = () => {
                 })
             );
         }
-    }, [id, dispatch]);
+    }, [isStateInitializedFromLocalStorage, id, dispatch]);
 
     const standings = standingsData?.[0]?.league?.standings;
 
@@ -116,20 +88,20 @@ const SinglePrediction = () => {
                             <div className="flex items-center custom-gray mb-5 flex-col md:flex-row md:mb-0">
                                 <FaRegClock className="mr-2" />
                                 <p>
-                                    {moment(selectedGameInfo?.date).format(
+                                    {moment(selectedGame?.date).format(
                                         "DD-MM-YYYY"
                                     )}{" "}
                                     -{" "}
                                     <Moment format="h:mm z" tz="CET">
-                                        {selectedGameInfo?.date}
+                                        {selectedGame?.date}
                                     </Moment>
                                 </p>
                             </div>
                             <div className="flex items-center custom-gray flex-col md:flex-row">
                                 <GiSoccerField className="mr-2" />
                                 <p>
-                                    {selectedGameInfo?.stadium},{" "}
-                                    {selectedGameInfo?.city}
+                                    {selectedGame?.stadium},{" "}
+                                    {selectedGame?.city}
                                 </p>
                             </div>
                         </div>
