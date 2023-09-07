@@ -31,12 +31,6 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        // dispatch(
-        //     fetchLeagueGamesData({
-        //         id,
-        //         formatedDate,
-        //     })
-        // );
         const storedData = localStorage.getItem(
             `footballData-${id}-${formatedDate}`
         );

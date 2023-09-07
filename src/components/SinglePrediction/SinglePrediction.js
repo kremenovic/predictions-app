@@ -58,41 +58,6 @@ const SinglePrediction = () => {
                 })
             );
         }
-        // // Single Game Data
-        // const footballDataSingle = localStorage.getItem(
-        //     `footballDataSingle-${id}`
-        // );
-        // if (footballDataSingle) {
-        //     dispatch(setData(JSON.parse(footballDataSingle)));
-        // } else {
-        //     dispatch(fetchSingleGameData(id));
-        // }
-        // // Selected Game Data
-        // // keeps data on refresh date, city, stadium
-        // const selectedGameData = localStorage.getItem(`selectedGame-${id}`);
-        // if (selectedGameData) {
-        //     setSelectedGameInfo(JSON.parse(selectedGameData));
-        // } else {
-        //     localStorage.setItem(
-        //         `selectedGame-${id}`,
-        //         JSON.stringify(selectedGame)
-        //     );
-        // }
-        // // Gets standings data from API
-        // const StandingsData = localStorage.getItem(
-        //     `Standings-${selectedLeague.id}-${selectedLeague.season}`
-        // );
-        // // console.log(JSON.parse(StandingsData));
-        // if (StandingsData) {
-        //     dispatch(setStandings(JSON.parse(StandingsData)));
-        // } else {
-        //     dispatch(
-        //         fetchStandingsData({
-        //             leagueID: selectedLeague.id,
-        //             leagueSeason: selectedLeague.season,
-        //         })
-        //     );
-        // }
     }, [isStateInitializedFromLocalStorage, id, dispatch]);
 
     const standings = standingsData?.[0]?.league?.standings;

@@ -5,7 +5,15 @@ export const loadState = () => {
         if (serializedState === null) {
             return undefined;
         }
-        return JSON.parse(serializedState);
+
+        const state = JSON.parse(serializedState);
+
+        const today = new Date().toISOString().split("T")[0];
+        if (state.game && state.game.selectedDate.split("T")[0] !== today) {
+            state.game.selectedDate = new Date().toISOString();
+        }
+
+        return state;
     } catch (err) {
         return undefined;
     }
