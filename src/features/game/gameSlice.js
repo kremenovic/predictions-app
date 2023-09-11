@@ -63,29 +63,32 @@ const gameSlice = createSlice({
         setLeagueGames: (state, { payload }) => {
             state.leagueGamesData = payload;
         },
+        setLoading: (state, { payload }) => {
+            state.loading = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchSingleGameData.pending, (state) => {
-                state.loading = true;
+                // state.loading = true;
             })
             .addCase(fetchSingleGameData.fulfilled, (state, { payload }) => {
-                state.loading = false;
+                // state.loading = false;
                 state.data = payload;
             })
             .addCase(fetchSingleGameData.rejected, (state, { payload }) => {
-                state.loading = false;
+                // state.loading = false;
                 state.error = payload;
             })
             .addCase(fetchStandingsData.pending, (state) => {
-                state.loading = true;
+                // state.loading = true;
             })
             .addCase(fetchStandingsData.fulfilled, (state, { payload }) => {
-                state.loading = false;
+                // state.loading = false;
                 state.standingsData = payload;
             })
             .addCase(fetchStandingsData.rejected, (state, { payload }) => {
-                state.loading = false;
+                // state.loading = false;
                 state.error = payload;
             })
             .addCase(fetchLeagueGamesData.pending, (state) => {
@@ -110,6 +113,7 @@ export const {
     setData,
     setStandings,
     setLeagueGames,
+    setLoading,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

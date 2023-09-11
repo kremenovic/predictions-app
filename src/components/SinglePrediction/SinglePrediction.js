@@ -16,7 +16,7 @@ import SectionTitle from "./SectionTitle/SectionTitle";
 import PredictionsInfo from "./PredictionsInfo/PredictionsInfo";
 import PieChart from "../Charts/PieChart";
 import TeamCharts from "../Charts/TeamCharts/TeamCharts";
-import { setData, setStandings } from "../../features/game/gameSlice";
+import { setLoading } from "../../features/game/gameSlice";
 import { fetchSingleGameData } from "../../features/game/singleGameThunk";
 import { fetchStandingsData } from "../../features/game/standingsThunk";
 const SinglePrediction = () => {
@@ -49,16 +49,35 @@ const SinglePrediction = () => {
     };
 
     useEffect(() => {
-        if (isStateInitializedFromLocalStorage) {
-            dispatch(fetchSingleGameData(id));
-            dispatch(
-                fetchStandingsData({
-                    leagueID: selectedLeague.id,
-                    leagueSeason: selectedLeague.season,
-                })
-            );
-        }
-    }, [isStateInitializedFromLocalStorage, id, dispatch]);
+        const fetchData = async () => {
+            if (isStateInitializedFromLocalStorage) {
+                dispatch(setLoading(true));
+                console.log("a");
+                try {
+                    await dispatch(fetchSingleGameData(id));
+                    await dispatch(
+                        fetchStandingsData({
+                            leagueID: selectedLeague.id,
+                            leagueSeason: selectedLeague.season,
+                        })
+                    );
+                    console.log("b");
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
+
+                dispatch(setLoading(false));
+            }
+        };
+
+        fetchData();
+    }, [
+        isStateInitializedFromLocalStorage,
+        id,
+        dispatch,
+        selectedLeague.id,
+        selectedLeague.season,
+    ]);
 
     const standings = standingsData?.[0]?.league?.standings;
 
