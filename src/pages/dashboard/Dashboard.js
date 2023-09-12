@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { db } from "../../firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
 import { useSelector, useDispatch } from "react-redux";
 import Leagues from "../../components/Leagues/Leagues";
@@ -31,20 +33,31 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        const storedData = localStorage.getItem(
-            `footballData-${id}-${formatedDate}`
-        );
+        const fetchDataFromFirestore = async () => {
+            try {
+                const docRef = doc(
+                    db,
+                    "allGames",
+                    `footballData-${id}-${formatedDate}`
+                );
+                const docSnap = await getDoc(docRef);
 
-        if (storedData) {
-            dispatch(setLeagueGames(JSON.parse(storedData)));
-        } else {
-            dispatch(
-                fetchLeagueGamesData({
-                    id,
-                    formatedDate,
-                })
-            );
-        }
+                if (docSnap.exists()) {
+                    dispatch(setLeagueGames(docSnap.data().data));
+                } else {
+                    dispatch(
+                        fetchLeagueGamesData({
+                            id,
+                            formatedDate,
+                        })
+                    );
+                }
+            } catch (error) {
+                console.error("Error fetching data from Firestore: ", error);
+            }
+        };
+
+        fetchDataFromFirestore();
     }, [id, formatedDate, dispatch]);
 
     return (
@@ -61,6 +74,12 @@ const Dashboard = () => {
                 <div className="games dark-bg rounded p-5 h-fit flex flex-col">
                     {loading ? (
                         <Loading />
+                    ) : data.length === 0 ? (
+                        <div className="empty-data-message">
+                            <p className="text-white text-center">
+                                No games available for current date.
+                            </p>
+                        </div>
                     ) : (
                         [...data]
                             .sort(
