@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
 export const fetchLeagueGamesData = createAsyncThunk(
     "game/fetchLeagueGamesData",
     async ({ id, formatedDate }, { rejectWithValue }) => {
@@ -15,10 +16,14 @@ export const fetchLeagueGamesData = createAsyncThunk(
                 }
             );
             const data = res.data.response;
-            localStorage.setItem(
-                `footballData-${id}-${formatedDate}`,
-                JSON.stringify(data)
+
+            const docRef = doc(
+                db,
+                "allGames",
+                `footballData-${id}-${formatedDate}`
             );
+            await setDoc(docRef, { data });
+
             return data;
         } catch (error) {
             console.log(error);

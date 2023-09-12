@@ -52,7 +52,6 @@ const SinglePrediction = () => {
         const fetchData = async () => {
             if (isStateInitializedFromLocalStorage) {
                 dispatch(setLoading(true));
-                console.log("a");
                 try {
                     await dispatch(fetchSingleGameData(id));
                     await dispatch(
@@ -61,7 +60,7 @@ const SinglePrediction = () => {
                             leagueSeason: selectedLeague.season,
                         })
                     );
-                    console.log("b");
+                    // console.log("b");
                 } catch (error) {
                     console.error("Error fetching data:", error);
                 }
