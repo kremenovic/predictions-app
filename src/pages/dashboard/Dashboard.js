@@ -11,12 +11,7 @@ import Predictions from "../../components/Predictions/Predictions";
 import DateFilter from "../../components/DateFilter/DateFilter";
 import MobileLeagues from "../../components/Leagues/MobileLeagues";
 import Loading from "../../components/Loading/Loading";
-import {
-    selectGame,
-    setLeagueGames,
-    selectLeague,
-    setData,
-} from "../../features/game/gameSlice";
+import { selectGame, setLeagueGames } from "../../features/game/gameSlice";
 import { fetchLeagueGamesData } from "../../features/game/leagueGamesThunk";
 const Dashboard = () => {
     const dispatch = useDispatch();
