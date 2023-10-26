@@ -34,7 +34,7 @@ function App() {
                     <Route path="bankroll" element={<Bankroll />} />
                 </Route>
                 <Route path="*" element={<Error />} />
-                <Route path="/registration" element={<Registration />} />
+                <Route path="/register" element={<Registration />} />
             </Routes>
         </Router>
     );

@@ -1,23 +1,104 @@
-# Getting Started with
+# Side project - Sports prediction web app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sports prediction web app is my ‘wanna-be’ side project that I have never been able to finish. The project is based on React and I implemented Firebase to save data from the API there in order to save API calls.
 
-## Available Scripts
+Img
 
-In the project directory, you can run: test
+## Table of contents
+
+-   [Overview](#overview)
+    -   [The challenge](#the-challenge)
+    -   [Screenshot](#screenshot)
+    -   [Built with](#built-with)
+-   [Installation](#installation)
+
+## Overview
+
+Side project based on React and implementing [https://www.api-football.com/](football API)</a>. They have other APIs such as basketball, baseball and it could be implemented in an all-in-one sports prediction application.
+
+### The challenge
+
+The idea and challenge was to build a sports prediction web application (there’s a PWA) that would help sports bettors decide which game to bet on. Most people use the Flashscore application to see the stats like previous games and standings, but here they can see more than that.
+
+Also, there are advice and tips that come from the API and I am going to show you in the screenshots all the data.
+
+Besides predictions I wanted to implement in this project:
+
+News
+Bankroll
+Chatroom
+Live streams (add streaming links
+User profile / Settings
+
+### Screenshot
+
+<h4>Dashboard page</h4>
+
+<img src="https://i.imgur.com/voEFkhR.png"/>
+
+Clicking on the banner on the /dashboard page will initiate downloading/installation of the PWA.
+
+<h4>Single game page - Overview</h4>
+
+<img src="https://i.imgur.com/1yESjqZ.png"/>
+
+<h4>Single game page - Teams</h4>
+
+<img src="https://i.imgur.com/1vloE3F.png"/>
+
+<h4>Single game page - H2H</h4>
+
+<img src="https://i.imgur.com/HYfu3hw.png"/>
+
+<h4>Single game page - Standings</h4>
+
+<img src="https://i.imgur.com/TvKoYtW.png"/>
+
+<h4>Register w/PaypPal page</h4>
+
+<img src="https://i.imgur.com/WhfmJtm.png"/>
+
+### Built with
+
+-   React
+-   Firebase
+
+## Installation
+
+Rename 'example_dot_env' file to '.env' file and update 'REACT_APP_API_URL' with your localhost URL.
+
+### `npm install`
+
+This command installs a package and any packages that it depends on.
+
+<h4>1. Create new Firebase project</h4>
+
+Create new Firebase project, and copy/paste your web app's Firebase configuration in firebase.js file.
+
+<h4>2. Update Firestore Database Rules</h4>
+
+After that, you need to go to Firestore Database and update the rules:
+
+```
+
+rules_version = '2';
+service cloud.firestore {
+match /databases/{database}/documents {
+match /{document=\*\*} {
+allow read, write;
+}
+// match any doc in transactions collection
+match /transactions/{transactionId} {
+allow read, write: if request.auth.uid != null;
+}
+}
+
+```
 
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `npm run build`
 
@@ -27,77 +108,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h4>Pages</h4>
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-```
-import axios from 'axios';
-
-const loginAndGetToken = async (username, password) => {
-  try {
-    // Make a POST request to the JWT authentication endpoint
-    const response = await axios.post('/wp-json/jwt-auth/v1/token', {
-      username,
-      password,
-    });
-
-    // If the request is successful, extract the token from the response
-    const token = response.data.token;
-
-    // Use the token to make a GET request to a custom REST API endpoint
-    const subscriptionResponse = await axios.get('/wp-json/my-plugin/v1/check-subscription', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    // If the subscription check is successful, return the token
-    if (subscriptionResponse.data.status === 'active') {
-      return token;
-    }
-
-    // If the subscription is not active, throw an error
-    throw new Error('Subscription is not active');
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-```
+-   /register
+-   /dashboard

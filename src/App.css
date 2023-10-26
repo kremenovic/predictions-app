@@ -218,6 +218,30 @@ body {
   margin: 0 auto;
 }
 
+.selected-plan {
+  background: #11b12d;
+  
+}
+
+.selected-plan .price,
+.selected-plan p {
+  color: #fff;
+}
+
+.selected-plan .border-dotted {
+  border-color: #fff;
+}
+
+.form input {
+  height: 40px;
+  padding: 15px;
+  outline: none;
+}
+
+.single-plan .border-t {
+  border-top: none;
+}
+
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
