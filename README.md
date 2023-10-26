@@ -2,8 +2,6 @@
 
 Sports prediction web app is my ‘wanna-be’ side project that I have never been able to finish. The project is based on React and I implemented Firebase to save data from the API there in order to save API calls.
 
-Img
-
 ## Table of contents
 
 -   [Overview](#overview)
