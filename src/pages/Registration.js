@@ -1,7 +1,36 @@
 import React, { useState } from "react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const Registration = () => {
     const [selected, setSelected] = useState("six");
+
+    const [userData, setUserData] = useState({
+        username: "", // initialize with form values
+        firstName: "", // initialize with form values
+        lastName: "", // initialize with form values
+        email: "", // initialize with form values
+    });
+
+    const createOrder = (data, actions) => {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    amount: {
+                        value: "9",
+                    },
+                },
+            ],
+        });
+    };
+
+    const onApprove = async (data, actions) => {
+        // Capture the transaction funds
+        await actions.order.capture();
+
+        // Create user in Firebase
+        console.log("success");
+    };
+
     return (
         <div className="h-full md:h-screen flex items-center justify-center">
             <div className="dark-bg rounded py-10 px-2 md:p-10 max-w-5xl w-full">
@@ -35,6 +64,16 @@ const Registration = () => {
                             <input type="text" placeholder="Username" />
                             <input type="email" placeholder="Email" />
                             <input type="password" placeholder="Password" />
+                            <div className="div">
+                                <PayPalScriptProvider
+                                    options={{ clientId: "test" }}
+                                >
+                                    <PayPalButtons
+                                        createOrder={createOrder}
+                                        onApprove={onApprove}
+                                    />
+                                </PayPalScriptProvider>
+                            </div>
                         </div>
                     </div>
                     <div className="plan-selection flex-flex-col w-full">
